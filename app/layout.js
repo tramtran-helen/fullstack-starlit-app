@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`poppins.className text-purple-400 font-bold`}>
+        <body className={`poppins.className text-purple-700 font-bold`}>
           <div className="bg-[url('/background.png')] opacity-100 fixed -z-10 inset-0"/>
           <Header />
           <main className='min-h-screen'>{children}</main>

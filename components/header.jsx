@@ -2,6 +2,8 @@ import react from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { Button } from './ui/button'
+import { PenBox, FolderOpen } from 'lucide-react'
 
 
 
@@ -18,12 +20,32 @@ const Header = () => {
             
 
             <div className='flex items-center gap-4 pr-14'>
-                <SignedOut>
-                    <SignInButton />
-                </SignedOut>
                 <SignedIn>
-                    <UserButton />
+                    <Link href='/dashboard#collections'>
+                        <Button variant='outline'>
+                            <FolderOpen size={18}/>
+                            <span className='hidden md:inline'>Collections</span>
+                        </Button>
+                    </Link>
                 </SignedIn>
+
+
+
+                <Link href='/journal/write'>
+                    <Button variant='outline'>
+                        <PenBox size={18}/>
+                        <span className='hidden md: inline'>Craft New Thoughts!</span>
+                    </Button>
+                
+                </Link>
+
+
+
+                <SignedOut>
+                    <SignInButton forceRedirectUrl='/dashboard'>
+                        <Button variant='outline'>Login</Button>
+                    </SignInButton>
+                </SignedOut>
             </div>
             </nav>
         </header>
