@@ -74,6 +74,27 @@ export default function Home() {
           </Card>
         ))}
       </section>
+
+
+
+      <div className='mt-24'>
+        <Card className='bg-gradient-to-r from-purple-100 to-purple-200'>
+          <CardContent className='p-12 text-center'>
+            <h2 className='text-3xl font-bold text-purple-900 mb-6'>
+              It's Time to Document Your Sky
+            </h2>
+            <p className='text-lg font-normal text-black mb-8 max-w-2xl mx-auto'>
+              Let the stars be your witness as you document your highs, your lows, and all the beautiful in-betweens. StarLit offers a calm digital retreat where your story is yours to write and revisit.
+            </p>
+            <Link href='/dashboard'>
+              <Button size='lg' variant='outline' className='animate-bounce text-purple-900 font-semibold'>
+                Get Started for Free!
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Poppins } from 'next/font/google'
 import Header from '../components/header.jsx'
 import { ClerkProvider } from '@clerk/nextjs'
+import { FaMoon } from 'react-icons/fa'
 
 
 
@@ -29,9 +30,14 @@ export default function RootLayout({ children }) {
 
 
 
-          <footer className='bg-purple-400 py-7 bg-opacity-10'>
-            <div>
-              <p className='mx-auto px-4 text-center text-black font-bold'>Made with 💗 by Tram Tran</p>
+          <footer className='bg-transparent py-4'>
+            <div className='max-w-md mx-auto bg-purple-100 bg-opacity-30 rounded-2xl shadow-md p-3'>
+              <p className='text-center text-purple-900 font-semibold text-sm'>
+                <span className='inline-flex items-center justify-center gap-1'>
+                  Built with Love and A Little Starlight <FaMoon size={15}/>
+                </span>
+                  <br />
+                  By Tram Tran</p>
             </div>
           </footer>
         </body>
