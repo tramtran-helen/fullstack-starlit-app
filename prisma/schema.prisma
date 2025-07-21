@@ -57,7 +57,7 @@ model Entry{
 model Draft{
   id String @id @default(cuid())
   title String?
-  ontent String? @db.Text
+  content String? @db.Text
   mood String?
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique

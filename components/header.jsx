@@ -5,12 +5,15 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Button } from './ui/button'
 import { PenBox, FolderOpen } from 'lucide-react'
 import UserMenu from './user-menu'
+import { checkUser } from '@/lib/checkUser'
 
 
 
 
 
-const Header = () => {
+const Header = async () => {
+    await checkUser()
+
     return(
         <header className='w-full py-4'>
             <nav className='w-full flex items-center justify-between px-8'>
