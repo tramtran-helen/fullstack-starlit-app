@@ -1,7 +1,27 @@
 import { Button } from "@/components/ui/button"
+import { Image, Lock, Sparkles } from "lucide-react"
 import Link from 'next/link'
 
 
+
+
+const features = [
+  {
+    icon: Image,
+    title: 'Quick Entry & AI-Powered Images',
+    description: 'Easily capture your thoughts on the go with fast text entry and AI-created images that reflect your emotions visually.'
+  },
+  {
+    icon: Sparkles,
+    title: 'Mood Analytics',
+    description: 'Track your emotional patterns over time with built-in mood logging and insightful visualizations to help you understand and improve your mental well-being.'
+  },
+  {
+    icon: Lock,
+    title: 'Secure & Private',
+    description: 'Your journal and mood data are protected with security and privacy, ensuring only you have access to your personal reflections.'
+  }
+]
 
 
 
@@ -32,7 +52,9 @@ export default function Home() {
 
 
       <section id='features'>
-
+        {features.map((feature, index) => (
+          
+        ))}
       </section>
     </div>
   )
