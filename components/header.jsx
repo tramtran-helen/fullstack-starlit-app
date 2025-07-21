@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Button } from './ui/button'
 import { PenBox, FolderOpen } from 'lucide-react'
+import UserMenu from './user-menu'
 
 
 
@@ -14,7 +15,7 @@ const Header = () => {
         <header className='w-full py-4'>
             <nav className='w-full flex items-center justify-between px-8'>
                 <Link href={'/'}>
-                <Image src='/logo.png' alt='StarLit logo' width={160} height={80} className='object contain'/>
+                <Image src='/logo.png' alt='StarLit logo' width={160} height={80} className='object-contain'/>
                 </Link>
 
             
@@ -34,7 +35,7 @@ const Header = () => {
                 <Link href='/journal/write'>
                     <Button variant='outline'>
                         <PenBox size={18}/>
-                        <span className='hidden md: inline'>Craft New Thoughts!</span>
+                        <span className='hidden md:inline'>Craft New Thoughts!</span>
                     </Button>
                 
                 </Link>
@@ -46,6 +47,12 @@ const Header = () => {
                         <Button variant='outline'>Login</Button>
                     </SignInButton>
                 </SignedOut>
+
+
+
+                <SignedIn>
+                    <UserMenu />
+                </SignedIn>
             </div>
             </nav>
         </header>

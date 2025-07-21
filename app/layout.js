@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
 
 
 
-          <footer className='bg-purple-400 py-10 bg-opacity-10'>
+          <footer className='bg-purple-400 py-7 bg-opacity-10'>
             <div>
               <p className='mx-auto px-4 text-center text-black font-bold'>Made with 💗 by Tram Tran</p>
             </div>
