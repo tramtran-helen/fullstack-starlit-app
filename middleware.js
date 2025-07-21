@@ -13,6 +13,8 @@ const isProtectedRoute = createRouteMatcher(
   ]
 )
 
+//Shield and Bot Detection - Arcjet
+
 export default clerkMiddleware(async(auth, req) => {
   const {userId, redirectToSignIn} = await auth()
 
