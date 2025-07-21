@@ -1,6 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { Image, Lock, Sparkles } from "lucide-react"
 import Link from 'next/link'
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 
 
 
@@ -51,9 +61,17 @@ export default function Home() {
 
 
 
-      <section id='features'>
+      <section id='features' className='mt-24 grid md:grid-cols-3 gap-8'>
         {features.map((feature, index) => (
-          
+          <Card key={feature.title} className='shadow-lg'>
+            <CardContent className='p-6'>
+              <div className='h-12 w-12 bg-purple-100 rounded-full flex items-center justify-center mb-4'>
+                <feature.icon className='h-6 w-6 text-purple-600' />
+              </div>
+              <h3 className='font-semibold text-xl text-purple-900 mb-2'>{feature.title}</h3>
+              <p className='text-black font-normal'>{feature.description}</p>
+            </CardContent>
+          </Card>
         ))}
       </section>
     </div>
