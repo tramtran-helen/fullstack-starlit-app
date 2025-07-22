@@ -1,6 +1,6 @@
 'use client'
 
-import react from 'react'
+import react, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
 import { useForm, Controller } from 'react-hook-form'
@@ -17,6 +17,12 @@ import {
 import { getMoodById, MOODS } from '@/app/lib/moods'
 import { BarLoader } from 'react-spinners'
 import { Button } from '@/components/ui/button'
+import useFetch from '@/hooks/use-fetch'
+import { createJournalEntry } from '@/actions/journal'
+import { toast } from 'sonner'
+import { getCollections } from '@/actions/collection'
+import { createCollection } from '@/actions/collection'
+import CollectionForm from '@/components/forms'
 
 
 
@@ -27,6 +33,14 @@ const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 
 const JournalEntryPage = () => {
+
+  const {loading: actionLoading, fn: actionFn, data: actionResult} = useFetch(createJournalEntry)
+  const [isCollectionDialogOpen, setIsCollectionDialogOpen] = useState(false)
+  const {loading: collectionsLoading, fn: fetchCollections, data: collections} = useFetch(getCollections)
+  const {loading: createCollectionLoading, fn: createCollectionFn, data: createdCollection} = useFetch(createCollection)
+
+
+
   const {
     register,
     handleSubmit,
@@ -44,11 +58,32 @@ const JournalEntryPage = () => {
   })
 
 
+  useEffect(() => {
+    fetchCollections()
+  }, [])
 
-  const isLoading = false
+  useEffect(() => {
+    if (actionResult && !actionLoading) {
+        router.push(`/collection/${actionResult.collectionId?actionResult.collectionId:'unorganized'}`)
+
+        toast.success(`Entry created successfully`)
+    }
+  }, [actionResult, actionLoading])
+
   const onSubmit = handleSubmit(async(data) => {
-    console.log(data)
+    const mood = getMoodById(data.mood)
+    actionFn({
+        ...data, 
+        moodScore: mood.score,
+        moodQuery: mood.pixabayQuery,
+    })
   })
+
+  const handleCreateCollection = async(data) => {
+    createCollection(data)
+  }
+
+  const isLoading = actionLoading || collectionsLoading
 
 
 
@@ -72,7 +107,7 @@ const JournalEntryPage = () => {
             disabled={isLoading}
             {...register('title')}
             placeholder='Name your little story 🧸'
-            className={`w-full py-5 text-md rounded-xl border-2 bg-white bg-opacity-70 placeholder:text-purple-300 focus:ring-2 focus:ring-purple-400 focus:outline-none ${
+            className={`w-full py-5 text-md rounded-xl border-2 bg-white bg-opacity-70 placeholder:text-purple-300 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 focus:outline-none transition-shadow duration-200 ${
               errors.title ? 'border-purple-500' : 'border-purple-700'
             }`}
             />
@@ -165,12 +200,29 @@ const JournalEntryPage = () => {
             control={control}
             name='collectionId'
             render={({ field }) => (
-                <Input
-                disabled={isLoading}
-                {...field}
-                placeholder='Optional Collection ID'
-                className='w-full py-5 text-md rounded-xl border-2 bg-white bg-opacity-70 placeholder:text-purple-300 focus:ring-2 focus:ring-purple-400 focus:outline-none border-purple-700'
-                />
+                <Select onValueChange={(value) => {
+                    if (value === 'new') {
+                        setIsCollectionDialogOpen(true)
+                    } else {
+                        field.onChange(value)
+                    }
+                }} value = {field.value}>
+                <SelectTrigger className="w-full py-5 text-md font-normal rounded-xl border-2 border-purple-700 bg-white bg-opacity-70 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+                  <SelectValue placeholder={<span className="text-purple-300 font-semibold text-sm">Select or create new collection here 🌸</span>}/>
+                </SelectTrigger>
+                <SelectContent>
+                  {(collections ?? []).map((collection) => (
+                    <SelectItem key={collection.id} value={collection.id}>
+                        {collection.name}
+                    </SelectItem>
+                  ))}
+                <SelectItem value='new'>
+                    <span>
+                        Create New Collection!
+                    </span>
+                </SelectItem>
+                </SelectContent>
+              </Select>
             )}
             />
           {
@@ -186,6 +238,14 @@ const JournalEntryPage = () => {
             <Button type='submit' className='px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition'>Go Live</Button>
         </div>
       </form>
+
+
+
+      <CollectionForm 
+      loading={createCollectionLoading} 
+      onSuccess={handleCreateCollection}
+      open={isCollectionDialogOpen} 
+      setOpen={setIsCollectionDialogOpen}/>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import Header from '../components/header.jsx'
 import { ClerkProvider } from '@clerk/nextjs'
 import { FaMoon } from 'react-icons/fa'
+import { Toaster } from "@/components/ui/sonner"
 
 
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <div className="bg-[url('/background.png')] opacity-100 fixed -z-10 inset-0"/>
           <Header />
           <main className='min-h-screen'>{children}</main>
+          <Toaster richColors/>
 
 
 

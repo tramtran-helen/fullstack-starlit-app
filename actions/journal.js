@@ -1,6 +1,10 @@
 'use server'
+
 import { auth } from "@clerk/nextjs/server"
 import { getPixabayImage } from "./public"
+import { db } from '@/lib/prisma'
+import { revalidatePath } from "next/cache"
+import { MOODS } from '@/app/lib/moods'
 
 
 
@@ -9,7 +13,7 @@ import { getPixabayImage } from "./public"
 export async function createJournalEntry(data) {
     try {
         const { userId } = await auth()
-        if (!userId) throw newError('Unauthorized')
+        if (!userId) throw new Error('Unauthorized')
 
         const user = await db.user.findUnique({
             where: { clerkUserId: userId}
@@ -37,7 +41,7 @@ export async function createJournalEntry(data) {
         })
 
         await db.draft.deleteMany({
-            where: { useId: user.id },
+            where: { userId: user.id },
         })
 
         revalidatePath('/dashboard')
