@@ -127,3 +127,7 @@
     to-purple-400 bg-clip-text tracking-tighter text-transparent pr-2 pb-2;
   }
 }
+
+.quill-editor .ql-editor {
+  min-height: 400px;
+}
