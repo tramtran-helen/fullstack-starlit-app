@@ -182,5 +182,15 @@ export const MOODS = {
 };
 
 export const getMoodById = (moodId) => {
-    return MOODS[moodId.toUpperCase()]
+  if (!moodId || typeof moodId !== 'string') return null; 
+  const mood = MOODS[moodId.toUpperCase()];
+  return mood ?? null;  
+}
+
+export const getMoodTrend = (averageScore) => {
+  if (averageScore >= 8) return "You've been great lately!"
+  if (averageScore >= 6) return "You've been well overall."
+  if (averageScore >= 4) return "You've been okay."
+  if (averageScore >= 2) return "Giving you hugs. Things must have been difficult for you..."
+  return "I'm always here even if you have had a tough time."
 }
