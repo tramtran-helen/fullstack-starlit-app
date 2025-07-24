@@ -65,11 +65,11 @@ const MoodAnalytics = () => {
   return (
     <>
       <div>
-        <h2 className="text-3xl text-purple-700 md:text-5xl lg:text-8xl mb-6 font-extrabold">
+        <h2 className="text-3xl text-purple-400 md:text-5xl lg:text-8xl mb-6 gradient-title">
           Dashboard
         </h2>
 
-        <label className="text-purple-600 md:text-3xl lg:text-xl mb-6 block font-semibold">
+        <label className="text-3xl text-purple-400 md:text-5xl lg:text-xl mb-6 gradient-title">
           Time Period
         </label>
 

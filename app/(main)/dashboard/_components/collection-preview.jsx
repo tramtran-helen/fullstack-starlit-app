@@ -1,7 +1,9 @@
 'use client'
 
-import { Plus } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import DeleteCollectionDialog from './delete-collection'
+import { useRouter } from 'next/navigation'
 
 const FolderTab = ({ variant }) => {
   let color = 'bg-purple-600'
@@ -17,10 +19,13 @@ const FolderTab = ({ variant }) => {
 const CollectionPreview = ({
   id,
   name,
+  entries = [],
   isUnorganized = false,
   isCreateNew = false,
   onCreateNew
 }) => {
+  const router = useRouter()
+
   if (isCreateNew) {
     return (
       <button
@@ -44,17 +49,30 @@ const CollectionPreview = ({
   const folderHref = isUnorganized ? '/collection/unorganized' : `/collection/${id}`
 
   return (
-    <Link href={folderHref} className="group relative block h-[200px] w-full">
+    <div className="relative h-[200px] w-full">
       <FolderTab variant={tabVariant} />
-      <div className={`relative h-full rounded-lg p-6 shadow-md hover:shadow-lg transition-all 
-        ${bgClass} text-purple-700 flex flex-col justify-between`}>
+      
+      <Link
+        href={folderHref}
+        className={`relative h-full block rounded-lg p-6 shadow-md hover:shadow-lg transition-all 
+        ${bgClass} text-purple-700 flex flex-col justify-between`}
+      >
         <div className="flex items-center gap-2">
           <span className="text-xl">🌙</span>
           <h3 className="text-purple font-semibold text-lg truncate">{name}</h3>
         </div>
-        <p className="text-sm opacity-70 text-gray">{isUnorganized ? 'Unorganized notes' : 'Collection Folder'}</p>
-      </div>
-    </Link>
+        <p className="text-sm opacity-70 text-gray">
+          {isUnorganized ? 'Unorganized notes' : 'Collection Folder'}
+        </p>
+      </Link>
+
+      {/* Delete Button (only for normal collections) */}
+      {!isUnorganized && (
+        <div className="absolute top-2 right-2 z-10">
+          <DeleteCollectionDialog collection={{ id, name }} entriesCount={entries.length} />
+        </div>
+      )}
+    </div>
   )
 }
 
