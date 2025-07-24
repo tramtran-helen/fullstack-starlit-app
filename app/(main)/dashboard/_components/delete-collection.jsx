@@ -48,10 +48,8 @@ const DeleteCollectionDialog = ({ collection, entriesCount = 0 }) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant='destructive' size='sm'>
-          <Trash2 className='h-4 w-4 mr-2' />
-          Delete
-        </Button>
+        <Button size='sm' variant='destructive'className='bg-purple-600 hover:bg-purple-700 text-white px-2 py-1 h-8'>
+          <Trash2 className='h-4 w-4' /></Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
