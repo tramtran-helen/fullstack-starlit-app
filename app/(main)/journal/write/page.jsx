@@ -23,6 +23,7 @@ import { toast } from 'sonner'
 import { getCollections } from '@/actions/collection'
 import { createCollection } from '@/actions/collection'
 import CollectionForm from '@/components/forms'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -38,7 +39,7 @@ const JournalEntryPage = () => {
   const [isCollectionDialogOpen, setIsCollectionDialogOpen] = useState(false)
   const {loading: collectionsLoading, fn: fetchCollections, data: collections} = useFetch(getCollections)
   const {loading: createCollectionLoading, fn: createCollectionFn, data: createdCollection} = useFetch(createCollection)
-
+  const router = useRouter()
 
 
   const {

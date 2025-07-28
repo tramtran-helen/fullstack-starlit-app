@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server"
 import { getPixabayImage } from "./public"
 import { db } from '@/lib/prisma'
 import { revalidatePath } from "next/cache"
-import { MOODS } from '@/app/lib/moods'
+import { MOODS, getMoodById } from '@/app/lib/moods'  
 
 
 
@@ -16,7 +16,7 @@ export async function createJournalEntry(data) {
         if (!userId) throw new Error('Unauthorized')
 
         const user = await db.user.findUnique({
-            where: { clerkUserId: userId}
+            where: { clerkUserId: userId }
         })
 
         if (!user) {
@@ -44,19 +44,25 @@ export async function createJournalEntry(data) {
             where: { userId: user.id },
         })
 
+      
         revalidatePath('/dashboard')
+        if (entry.collectionId) {
+            revalidatePath(`/collection/${entry.collectionId}`)
+        } else {
+            revalidatePath(`/collection/unorganized`)
+        }
+
         return entry
-    } catch(err) {
+    } catch (err) {
         throw new Error(err.message)
     }
 }
 
 
 
-export async function getJournalEntries({ collectionId, orderBy = 'desc',} = {}) {
-
+export async function getJournalEntries({ collectionId, orderBy = 'desc' } = {}) {
     try {
-        const { userId } = await auth
+        const { userId } = await auth() 
         if (!userId) throw new Error('Unauthorized')
 
         const user = await db.user.findUnique({
@@ -69,10 +75,10 @@ export async function getJournalEntries({ collectionId, orderBy = 'desc',} = {})
             where: {
                 userId: user.id,
                 ...(collectionId === 'unorganized'
-                    ? {collectionId: null}
+                    ? { collectionId: null }
                     : collectionId
-                    ? {collectionId}
-                    : {}
+                        ? { collectionId }
+                        : {}
                 )
             },
             include: {
@@ -88,11 +94,10 @@ export async function getJournalEntries({ collectionId, orderBy = 'desc',} = {})
             }
         })
 
-        const entriesWithMoodData = entries.map((entry => ({
+        const entriesWithMoodData = entries.map((entry) => ({
             ...entry,
             moodData: getMoodById(entry.mood),
-
-        })))
+        }))
 
         return {
             success: true,
@@ -100,8 +105,44 @@ export async function getJournalEntries({ collectionId, orderBy = 'desc',} = {})
                 entries: entriesWithMoodData,
             }
         }
-    } catch(err) {
-        return {success: false, error: err.message}
+    } catch (err) {
+        return { success: false, error: err.message }
+    }
+}
 
+
+export async function getJournalEntry(id) {
+    try {
+        const { userId } = await auth()
+        if (!userId) throw new Error('Unauthorized')
+
+        const user = await db.user.findUnique({
+            where: { clerkUserId: userId }
+        })
+
+        if (!user) {
+            throw new Error('User not found')
+        }
+
+        const entry = await db.entry.findFirst({
+            where: {
+                id,
+                userId: user.id,
+            },
+            include: {
+                collection: {
+                    select: {
+                        id: true,
+                        name: true,
+                    }
+                }
+            }
+        })
+
+        if (!entry) throw new Error('Entry not found')
+
+        return entry
+    } catch (err) {
+        throw new Error(err.message)
     }
 }

@@ -18,10 +18,6 @@ import { CartesianGrid, LineChart, ResponsiveContainer } from "recharts"
 import { format, parseISO } from "date-fns"
 import { XAxis, YAxis, Line, Tooltip, Legend } from "recharts"
 
-
-
-
-
 const timeOptions = [
   { value: '7d', label: 'Last 7 Days' },
   { value: '15d', label: 'Last 15 Days' },
@@ -104,7 +100,6 @@ const MoodAnalytics = () => {
           </CardHeader>
           <CardContent>
             <p className='text-3xl font-extrabold text-purple-800'>{stats.averageScore}/10</p>
-            <p className='text-xs text-purple-500'>~{stats.dailyAverage} entries per day</p>
           </CardContent>
         </Card>
 
@@ -163,6 +158,16 @@ const MoodAnalytics = () => {
                   strokeWidth={3}
                   dot={{ stroke: '#7c3aed', strokeWidth: 2, fill: '#c4b5fd' }}
                   activeDot={{ r: 6 }}
+                />
+                <Line
+                  yAxisId='right'
+                  type='monotone'
+                  dataKey='entryCount'
+                  stroke='#c084fc' // violet-300
+                  name='Entries'
+                  strokeWidth={2}
+                  dot={{ stroke: '#c084fc', strokeWidth: 2, fill: '#f3e8ff' }}
+                  activeDot={{ r: 5 }}
                 />
               </LineChart>
             </ResponsiveContainer>

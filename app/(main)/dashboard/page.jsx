@@ -3,6 +3,7 @@ import { getJournalEntries } from '@/actions/journal'
 import Collections from './_components/collections'
 import react from 'react'
 import MoodAnalytics from './_components/mood-analytics'
+import Link from 'next/link'
 
 
 

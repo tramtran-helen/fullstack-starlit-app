@@ -2,7 +2,7 @@
 
 import { Plus, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import DeleteCollectionDialog from './delete-collection'
+import DeleteCollectionDialog from '../../collection/_components/delete-collection'
 import { useRouter } from 'next/navigation'
 
 const FolderTab = ({ variant }) => {
