@@ -19,7 +19,7 @@ const JournalEntryPage = async ({ params }) => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
        <div className="mb-4">
-        <Link href="/entries" className="text-l text-purple-300 hover:text-purple-100 transition">
+        <Link href={`/collection/${entry.collectionId || 'unorganized'}`} className="text-l text-purple-300 hover:text-purple-100 transition">
           ✪ Back to Entries
         </Link>
       </div>
