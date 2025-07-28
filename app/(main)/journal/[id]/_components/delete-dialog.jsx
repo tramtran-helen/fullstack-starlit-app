@@ -48,8 +48,7 @@ const DeleteDialog = ({ entryId }) => {
       <AlertDialogTrigger asChild>
         <Button
           size='sm'
-          variant='destructive'
-          className='bg-purple-600 hover:bg-purple-700 text-white px-2 py-1 h-8'
+          variant='outline'
         >
           <Trash2 className='h-4 w-4' />
         </Button>

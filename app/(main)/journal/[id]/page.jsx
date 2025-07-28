@@ -30,7 +30,7 @@ const JournalEntryPage = async ({ params }) => {
             src={entry.moodImageUrl}
             alt="Mood Visualization"
             fill
-            className="object-cover"
+            className="object-cover rounded-xl"
             priority
           />
         </div>
