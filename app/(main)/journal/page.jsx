@@ -1,13 +1,10 @@
 import { getJournalEntries } from '@/actions/journal'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 const EntriesPage = async () => {
-  const router = useRouter();
   const entriesData = await getJournalEntries()
   const entries = entriesData?.data?.entries || []
 
-  // Sort newest first
   const sortedEntries = entries.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   )
