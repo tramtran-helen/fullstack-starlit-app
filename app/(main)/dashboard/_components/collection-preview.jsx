@@ -5,6 +5,10 @@ import Link from 'next/link'
 import DeleteCollectionDialog from '../../collection/_components/delete-collection'
 import { useRouter } from 'next/navigation'
 
+
+
+
+
 const FolderTab = ({ variant }) => {
   let color = 'bg-purple-600'
 

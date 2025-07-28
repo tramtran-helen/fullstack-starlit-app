@@ -3,6 +3,10 @@ import { getJournalEntries } from "@/actions/journal"
 import DeleteCollectionDialog from "../_components/delete-collection"
 import JournalFilters from "../_components/journal-filters"
 
+
+
+
+
 const CollectionPage = async ({params}) => {
     const { collectionId } = params
     const entries = await getJournalEntries({ collectionId })

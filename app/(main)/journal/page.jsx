@@ -1,6 +1,10 @@
 import { getJournalEntries } from '@/actions/journal'
 import Link from 'next/link'
 
+
+
+
+
 const EntriesPage = async () => {
   const entriesData = await getJournalEntries()
   const entries = entriesData?.data?.entries || []

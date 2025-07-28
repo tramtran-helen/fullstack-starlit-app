@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <html lang="en">
         <body className={`poppins.className text-purple-700 font-bold`}>
           <div className="bg-[url('/background.png')] opacity-100 fixed -z-10 inset-0"/>

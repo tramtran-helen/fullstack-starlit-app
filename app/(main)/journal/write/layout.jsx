@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import react, { Suspense } from 'react'
-import { BarLoader } from 'react-spinners'
 
 
 
