@@ -34,7 +34,7 @@ I built StarLit with my love for writing, psychology, and a sparkling aspiration
   Organize entries into custom themes or categories for better navigation and reflection.
 
 - **Starry UI Theme**  
-  Designed for dreamy minds—soft visuals, calming colors, and a distraction-free experience.
+  Designed for dreamy minds - soft visuals, calming colors, and a distraction-free experience.
 <br><br>
 
 
