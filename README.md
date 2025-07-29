@@ -2,7 +2,14 @@
 ***StarLit*** is a full-stack journaling web app that supports emotional well-being through mood tracking, AI-generated imagery, and data-driven insights. Users can write entries, tag moods, and visualize emotional patterns over time. With a calming starry theme and features like entry collections, StarLit offers a focused, personal space for reflection.
 <br><br>
 
-
+<div>
+    <a href="https://www.loom.com/share/9698047826514391aa8bb1d177f51f71">
+      <p>StarLit Video WalkThrough</p>
+    </a>
+    <a href="https://www.loom.com/share/9698047826514391aa8bb1d177f51f71">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/9698047826514391aa8bb1d177f51f71-f5c691a03a1adf5d-full-play.gif">
+    </a>
+  </div>
 
 ## ✨ Inspiration
 I built StarLit with my love for writing, psychology, and a sparkling aspiration to bridge technology and health support. It aims to enhance self-reflection by combining expressive journaling with thoughtful tech-driven features that promote emotional awareness and well-being.
