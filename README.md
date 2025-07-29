@@ -40,8 +40,6 @@ I built StarLit with my love for writing, psychology, and a sparkling aspiration
 
 
 ## 🛠️ Tech Stack
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [![Next.js][Next.js-badge]][Next.js-url]
 * [![React][React.js-badge]][React.js-url]
 * [![Tailwind CSS][TailwindCSS-badge]][TailwindCSS-url]
